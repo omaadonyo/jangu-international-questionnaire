@@ -19,6 +19,8 @@ class PublicForm extends Component
 
     public bool $submitted = false;
 
+    public int $currentStep = 0;
+
     public function mount(): void
     {
         foreach ($this->fields as $field) {
@@ -58,6 +60,85 @@ class PublicForm extends Component
         return $groups;
     }
 
+    #[Computed]
+    public function sectionKeys(): array
+    {
+        return array_keys($this->groupedFields);
+    }
+
+    #[Computed]
+    public function currentSection(): string
+    {
+        $keys = $this->sectionKeys;
+
+        return $keys[$this->currentStep] ?? '';
+    }
+
+    #[Computed]
+    public function progressPercent(): int
+    {
+        $keys = $this->sectionKeys;
+        $total = count($keys);
+
+        return $total > 0 ? (int) round((($this->currentStep + 1) / $total) * 100) : 0;
+    }
+
+    public function nextStep(): void
+    {
+        $keys = $this->sectionKeys;
+        $rules = $this->buildRulesForStep($this->currentStep);
+
+        if (! empty($rules)) {
+            $this->validate($rules);
+        }
+
+        if ($this->currentStep < count($keys) - 1) {
+            $this->currentStep++;
+        }
+    }
+
+    public function prevStep(): void
+    {
+        if ($this->currentStep > 0) {
+            $this->currentStep--;
+        }
+    }
+
+    public function goToStep(int $step): void
+    {
+        $keys = $this->sectionKeys;
+
+        if ($step >= 0 && $step < count($keys) && $step <= $this->currentStep + 1) {
+            $this->currentStep = $step;
+        }
+    }
+
+    private function buildRulesForStep(int $step): array
+    {
+        $keys = $this->sectionKeys;
+        $section = $keys[$step] ?? '';
+        $fieldsInSection = $this->groupedFields[$section] ?? [];
+        $rules = [];
+
+        foreach ($fieldsInSection as $field) {
+            if ($field->type === 'consent') {
+                $rules["consent.{$field->key}"] = $field->required ? 'accepted' : 'nullable';
+            } elseif (! in_array($field->type, ['section_header'])) {
+                $rule = $field->required ? 'required' : 'nullable';
+                if ($field->type === 'email') {
+                    $rule .= '|email';
+                } elseif ($field->type === 'url') {
+                    $rule .= '|url';
+                } elseif ($field->type === 'tel') {
+                    $rule .= '|min:10';
+                }
+                $rules["formData.{$field->key}"] = $rule;
+            }
+        }
+
+        return $rules;
+    }
+
     public function submit(): void
     {
         $rules = [];
@@ -78,27 +159,7 @@ class PublicForm extends Component
             }
         }
 
-        $this->validate($rules, [], [
-            'formData.first_name' => 'first name',
-            'formData.email' => 'email address',
-            'formData.phone' => 'phone number',
-            'formData.nin' => 'NIN',
-            'formData.date_of_birth' => 'date of birth',
-            'formData.next_of_kin_name' => 'next of kin name',
-            'formData.next_of_kin_phone' => 'next of kin phone',
-            'formData.personal_statement' => 'personal statement',
-            'formData.business_description' => 'business description',
-            'formData.skills_talents' => 'skills & talents',
-            'formData.time_commitment' => 'time commitment',
-            'formData.hear_about' => 'how you heard about us',
-            'formData.applied_before' => 'applied before',
-            'formData.gender' => 'gender',
-            'formData.education_level' => 'education level',
-            'formData.district' => 'district',
-            'formData.county' => 'county',
-            'formData.sub_county' => 'sub-county',
-            'formData.village' => 'village',
-        ]);
+        $this->validate($rules);
 
         $data = $this->formData;
         foreach ($this->consent as $key => $value) {
@@ -107,7 +168,7 @@ class PublicForm extends Component
             }
         }
 
-        FormSubmission::create([
+        $submission = FormSubmission::create([
             'data' => $data,
             'first_name' => $data['first_name'] ?? null,
             'email' => $data['email'] ?? null,

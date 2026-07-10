@@ -13,50 +13,50 @@
         {{-- Stats Cards --}}
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <flux:card class="p-4 relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 pointer-events-none"></div>
                 <div class="flex items-center gap-3 relative">
-                    <div class="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg shadow-emerald-500/20">
+                    <div class="flex size-11 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
                         <flux:icon name="document-text" variant="solid" class="size-5 text-white" />
                     </div>
                     <div>
                         <flux:text variant="subtle" class="text-sm">Total Responses</flux:text>
-                        <flux:heading size="xl" class="text-emerald-600 dark:text-emerald-400">{{ $this->stats['total'] }}</flux:heading>
+                        <flux:heading size="xl" class="text-primary">{{ $this->stats['total'] }}</flux:heading>
                     </div>
                 </div>
             </flux:card>
             <flux:card class="p-4 relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-secondary/10 to-secondary/5 pointer-events-none"></div>
                 <div class="flex items-center gap-3 relative">
-                    <div class="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-600 shadow-lg shadow-yellow-500/20">
-                        <flux:icon name="clock" variant="solid" class="size-5 text-white" />
+                    <div class="flex size-11 items-center justify-center rounded-xl bg-secondary shadow-lg shadow-secondary/20">
+                        <flux:icon name="clock" variant="solid" class="size-5 text-primary" />
                     </div>
                     <div>
                         <flux:text variant="subtle" class="text-sm">Pending Review</flux:text>
-                        <flux:heading size="xl" class="text-yellow-600 dark:text-yellow-400">{{ $this->stats['pending'] }}</flux:heading>
+                        <flux:heading size="xl" class="text-primary">{{ $this->stats['pending'] }}</flux:heading>
                     </div>
                 </div>
             </flux:card>
             <flux:card class="p-4 relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-600/5 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 pointer-events-none"></div>
                 <div class="flex items-center gap-3 relative">
-                    <div class="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/20">
+                    <div class="flex size-11 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
                         <flux:icon name="arrow-trending-up" variant="solid" class="size-5 text-white" />
                     </div>
                     <div>
                         <flux:text variant="subtle" class="text-sm">This Week</flux:text>
-                        <flux:heading size="xl" class="text-blue-600 dark:text-blue-400">{{ $this->stats['recent'] }}</flux:heading>
+                        <flux:heading size="xl" class="text-primary">{{ $this->stats['recent'] }}</flux:heading>
                     </div>
                 </div>
             </flux:card>
             <flux:card class="p-4 relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-violet-600/5 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-secondary/10 to-secondary/5 pointer-events-none"></div>
                 <div class="flex items-center gap-3 relative">
-                    <div class="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-violet-600 shadow-lg shadow-violet-500/20">
-                        <flux:icon name="users" variant="solid" class="size-5 text-white" />
+                    <div class="flex size-11 items-center justify-center rounded-xl bg-secondary shadow-lg shadow-secondary/20">
+                        <flux:icon name="users" variant="solid" class="size-5 text-primary" />
                     </div>
                     <div>
                         <flux:text variant="subtle" class="text-sm">Male / Female</flux:text>
-                        <flux:heading size="xl" class="text-violet-600 dark:text-violet-400">{{ $this->stats['gender']['Male'] ?? 0 }} / {{ $this->stats['gender']['Female'] ?? 0 }}</flux:heading>
+                        <flux:heading size="xl" class="text-primary">{{ $this->stats['gender']['Male'] ?? 0 }} / {{ $this->stats['gender']['Female'] ?? 0 }}</flux:heading>
                     </div>
                 </div>
             </flux:card>
@@ -65,11 +65,11 @@
         {{-- Charts --}}
         <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
             <flux:card class="p-4 relative overflow-hidden">
-                <div class="absolute top-0 right-0 size-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute top-0 right-0 size-32 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
                 <div class="relative">
                     <div class="flex items-center gap-2 mb-4">
-                        <div class="flex size-8 items-center justify-center rounded-lg bg-emerald-500/10">
-                            <flux:icon name="academic-cap" variant="solid" class="size-4 text-emerald-600 dark:text-emerald-400" />
+                        <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10">
+                            <flux:icon name="academic-cap" variant="solid" class="size-4 text-primary" />
                         </div>
                         <flux:heading>Education Level</flux:heading>
                     </div>
@@ -81,8 +81,8 @@
                                     <flux:text variant="strong" class="capitalize">{{ $level ?: 'Not specified' }}</flux:text>
                                     <flux:text variant="subtle">{{ $count }} ({{ $pct }}%)</flux:text>
                                 </div>
-                                <div class="h-2.5 w-full overflow-hidden rounded-full bg-emerald-100 dark:bg-emerald-900/30">
-                                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all" style="width: {{ $pct }}%"></div>
+                                <div class="h-2.5 w-full overflow-hidden rounded-full bg-primary/10">
+                                    <div class="h-full rounded-full bg-primary transition-all" style="width: {{ $pct }}%"></div>
                                 </div>
                             </div>
                         @empty
@@ -92,11 +92,11 @@
                 </div>
             </flux:card>
             <flux:card class="p-4 relative overflow-hidden">
-                <div class="absolute top-0 right-0 size-32 bg-pink-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute top-0 right-0 size-32 bg-secondary/10 rounded-full blur-2xl pointer-events-none"></div>
                 <div class="relative">
                     <div class="flex items-center gap-2 mb-4">
-                        <div class="flex size-8 items-center justify-center rounded-lg bg-pink-500/10">
-                            <flux:icon name="user-group" variant="solid" class="size-4 text-pink-600 dark:text-pink-400" />
+                        <div class="flex size-8 items-center justify-center rounded-lg bg-secondary/20">
+                            <flux:icon name="user-group" variant="solid" class="size-4 text-secondary" />
                         </div>
                         <flux:heading>Gender Distribution</flux:heading>
                     </div>
@@ -104,16 +104,14 @@
                         @forelse($this->stats['gender'] as $gender => $count)
                             @php
                                 $pct = $this->stats['total'] > 0 ? round(($count / $this->stats['total']) * 100) : 0;
-                                $barColors = ['Male' => 'from-blue-500 to-blue-400', 'Female' => 'from-pink-500 to-pink-400'];
-                                $bgColors = ['Male' => 'bg-blue-100 dark:bg-blue-900/30', 'Female' => 'bg-pink-100 dark:bg-pink-900/30'];
                             @endphp
                             <div>
                                 <div class="mb-1 flex items-center justify-between text-sm">
                                     <flux:text variant="strong">{{ $gender ?: 'Not specified' }}</flux:text>
                                     <flux:text variant="subtle">{{ $count }} ({{ $pct }}%)</flux:text>
                                 </div>
-                                <div class="h-2.5 w-full overflow-hidden rounded-full {{ $bgColors[$gender] ?? 'bg-neutral-200 dark:bg-neutral-700' }}">
-                                    <div class="h-full rounded-full bg-gradient-to-r {{ $barColors[$gender] ?? 'from-accent to-accent' }} transition-all" style="width: {{ $pct }}%"></div>
+                                <div class="h-2.5 w-full overflow-hidden rounded-full bg-secondary/20">
+                                    <div class="h-full rounded-full bg-secondary transition-all" style="width: {{ $pct }}%"></div>
                                 </div>
                             </div>
                         @empty
@@ -123,11 +121,11 @@
                 </div>
             </flux:card>
             <flux:card class="p-4 relative overflow-hidden">
-                <div class="absolute top-0 right-0 size-32 bg-violet-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute top-0 right-0 size-32 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
                 <div class="relative">
                     <div class="flex items-center gap-2 mb-4">
-                        <div class="flex size-8 items-center justify-center rounded-lg bg-violet-500/10">
-                            <flux:icon name="megaphone" variant="solid" class="size-4 text-violet-600 dark:text-violet-400" />
+                        <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10">
+                            <flux:icon name="megaphone" variant="solid" class="size-4 text-primary" />
                         </div>
                         <flux:heading>How They Heard</flux:heading>
                     </div>
@@ -139,8 +137,8 @@
                                     <flux:text variant="strong" class="capitalize">{{ $source ?: 'Not specified' }}</flux:text>
                                     <flux:text variant="subtle">{{ $count }} ({{ $pct }}%)</flux:text>
                                 </div>
-                                <div class="h-2.5 w-full overflow-hidden rounded-full bg-violet-100 dark:bg-violet-900/30">
-                                    <div class="h-full rounded-full bg-gradient-to-r from-violet-500 to-violet-400 transition-all" style="width: {{ $pct }}%"></div>
+                                <div class="h-2.5 w-full overflow-hidden rounded-full bg-primary/10">
+                                    <div class="h-full rounded-full bg-primary transition-all" style="width: {{ $pct }}%"></div>
                                 </div>
                             </div>
                         @empty
